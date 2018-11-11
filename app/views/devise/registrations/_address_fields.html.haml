@@ -1,0 +1,14 @@
+= fields_for "#{type}" do |s|
+  = s.fields_for :address do |a|
+    = a.hidden_field :addressable_type, value: "user_#{type}"
+    = a.hidden_field :addressable_id, value: "#{user.id}"
+    = a.label :address
+    = a.text_field :address, placeholder: "Address", id: "#{type}_address"
+    = a.label :zipcode
+    = a.text_field :zipcode, placeholder: "Zipcode", id: "#{type}_zipcode"
+    = a.label :country
+    = a.text_field :country, placeholder: "Country", id: "#{type}_zountry"
+    = a.label :city
+    = a.text_field :city, placeholder: "City", id: "#{type}_city"
+    = a.label :phone
+    = a.text_field :phone, placeholder: "Phone", id: "#{type}_phone"

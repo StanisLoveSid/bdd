@@ -1,0 +1,6 @@
+= book.title
+= book.description
+= book.number_of_pages
+= book.publication_date
+= book.authors.map(&:full_name).join(', ')
+= link_to "Buy book", buy_book_path(order_item: {book_id: book.id, order_id: current_order})

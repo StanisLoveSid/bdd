@@ -1,0 +1,8 @@
+Credit card
+= form_for @order, url: wizard_path, method: :put do |f|
+  = f.fields_for :credit_card do |c|
+    = c.text_field :number, id: "Number"
+    = c.text_field :name, id: "Name"
+    = c.text_field :expiration_date, id: "Expiration date"
+    = c.text_field :cvv, id: "Cvv"
+  = f.submit "Next step"

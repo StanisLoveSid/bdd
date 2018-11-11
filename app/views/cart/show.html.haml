@@ -1,0 +1,4 @@
+= "Items in cart #{current_order.order_items.count}"
+- current_order.order_items.each do |order_item|
+  = order_item.book.title
+  = link_to "Remove", remove_book_path(order_item), method: :delete

@@ -1,0 +1,6 @@
+= form_for @order, url: wizard_path, method: :put do |f|
+  - Delivery.all.each do |delivery|
+    = delivery.title
+    = f.label :delivery
+    = f.radio_button :delivery_id, delivery.id, id: "delivery"
+    = f.submit "Next step"

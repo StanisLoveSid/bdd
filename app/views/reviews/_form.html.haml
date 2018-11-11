@@ -1,0 +1,7 @@
+= form_for [@book, @book.reviews.new] do |f|
+  = f.hidden_field :book_id, value: @book.id
+  - (1..5).to_a.each do |n|
+    = f.radio_button :rate, n, id: "#{n}"
+  = f.text_field :title, placeholder: "Title"
+  = f.text_field :description, placeholder: "Description"
+  = f.submit "Submit"

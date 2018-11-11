@@ -1,0 +1,8 @@
+= @book.title
+= @book.description
+= @book.number_of_pages
+= @book.publication_date
+= @book.authors.map(&:full_name).join(",")
+
+.add-review
+  = render partial: "reviews/form"
