@@ -1,7 +1,11 @@
 = fields_for "#{type}" do |s|
   = s.fields_for :address do |a|
-    = a.hidden_field :addressable_type, value: "order_#{type}"
+    = a.hidden_field :addressable_type, value: "#{type}"
     = a.hidden_field :addressable_id, value: "#{order.id}"
+    = a.label :first_name
+    = a.text_field :first_name, placeholder: "First name", id: "#{type}_first_name"
+    = a.label :last_name
+    = a.text_field :last_name, placeholder: "Last name", id: "#{type}_last_name"
     = a.label :address
     = a.text_field :address, placeholder: "Address", id: "#{type}_address"
     = a.label :zipcode

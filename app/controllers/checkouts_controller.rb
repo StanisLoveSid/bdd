@@ -1,6 +1,7 @@
 class CheckoutsController < ApplicationController
+  include Rectify::ControllerHelpers
   include Wicked::Wizard
-  steps :address, :delivery, :credit_card, :confirm, :complete
+  steps :address, :delivery, :payment, :confirm, :complete
 
   def show
     @user = current_user
@@ -8,26 +9,45 @@ class CheckoutsController < ApplicationController
     render_wizard
   end
 
+  #def update
+  #  @order = current_order
+  #  case step
+  #  when :address
+  #    @order.build_order_billing(order_billing_params)
+  #    if params[:use_billing] == "1"
+  #      @order.build_order_shipping(order_billing_params)
+  #    else
+  #      @order.build_order_shipping(order_shipping_params)
+  #    end
+  #    @order.save
+  # when :delivery
+  #    delivery = Delivery.find_by(id: [params[:order][:delivery_id]])
+  #    @order.delivery = delivery
+  #    @order.save
+  #  when :credit_card
+  #    @order.build_credit_card(credit_card_params)
+  #    @order.save
+  #  when :confirm
+  #   @order.place_order
+  #  when :complete
+  #  end
+  #  render_wizard @order
+  #end
+
   def update
-    @order = current_order
-    case step
-    when :address
-      @order.build_order_billing(order_billing_params)
-      @order.build_order_shipping(order_shipping_params) if params[:shipping] == "1"
-      @order.save
-    when :delivery
-      delivery = Delivery.find_by(id: [params[:order][:delivery_id]])
-      @order.delivery = delivery
-      @order.save
-    when :credit_card
-      @order.build_credit_card(credit_card_params)
-      @order.save
-    when :confirm
-      @order.place_order
-    when :complete
+    CheckoutPage::ProceedCheckout.call(current_order, params, step) do
+      on(:invalid) do |*attrs|
+        present step_presenter.new(*attrs)
+        render_wizard
+      end
+      on(:ok) { render_wizard current_order }
     end
-    render_wizard @order
   end
+
+  def step_presenter
+    "CheckoutPage::#{step.capitalize}StepPresenter".constantize
+  end
+
 
   private
 

@@ -1,7 +1,8 @@
 = form_for @order, url: wizard_path, method: :put do |f|
   .order-billing
     = render partial: 'address_fields', locals: { f: f, type: :order_billing, order: @order}
-  = check_box_tag :shipping 
+  = f.check_box :use_billing 
   .order-shipping
     = render partial: 'address_fields', locals: { f: f, type: :order_shipping, order: @order}
   = f.submit "Next step"
+

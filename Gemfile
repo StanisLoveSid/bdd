@@ -20,6 +20,7 @@ gem 'pry'
 gem 'wicked'
 gem 'simple_form'
 gem 'aasm'
+gem 'rectify'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

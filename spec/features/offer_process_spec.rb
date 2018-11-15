@@ -37,7 +37,7 @@ feature 'Offering book(s)' do
   end
 
   scenario 'fill credit card data' do
-    visit checkout_path("credit_card")
+    visit checkout_path("payment")
     fill_in "Number", with: Faker::Number.number(12)
     fill_in "Name", with: Faker::Name.name
     fill_in "Cvv", with: Faker::Number.number(3)

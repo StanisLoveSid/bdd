@@ -3,7 +3,7 @@ require 'rails_helper'
 
 feature 'User writes a review' do
   before do
-  	@book = Book.create
+  	@book = Book.create title: "Lol"
   end
 
   scenario 'create review' do

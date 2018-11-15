@@ -1,10 +1,11 @@
 class Order < ApplicationRecord
   include AASM
-
+  
   has_many :order_items
   belongs_to :user, optional: true
   belongs_to :delivery, optional: true
-  has_one :credit_card
+  has_one :credit_card, dependent: :destroy
+  has_one :coupon, dependent: :nullify
 
   has_one :order_billing, -> { where(addressable_scope: :order_billing) },
     as: :addressable,  class_name: "Address", dependent: :destroy
