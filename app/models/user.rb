@@ -4,10 +4,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :validatable
 
-  has_one :user_billing, -> { where(addressable_scope: :user_billing) },
+  has_one :order_billing, -> { where(addressable_scope: :order_billing) },
     as: :addressable,  class_name: "Address", dependent: :destroy
 
-  has_one :user_shipping, -> { where(addressable_scope: :user_shipping) },
+  has_one :order_shipping, -> { where(addressable_scope: :order_shipping) },
     as: :addressable, class_name: "Address", dependent: :destroy
 
 end

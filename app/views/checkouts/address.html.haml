@@ -1,8 +1,36 @@
-= form_for @order, url: wizard_path, method: :put do |f|
-  .order-billing
-    = render partial: 'address_fields', locals: { f: f, type: :order_billing, order: @order}
-  = f.check_box :use_billing 
-  .order-shipping
-    = render partial: 'address_fields', locals: { f: f, type: :order_shipping, order: @order}
-  = f.submit "Next step"
+= render layout: 'checkouts/layout' do
+  = form_for current_order, url: wizard_path, method: :put, class: 'res-mb-100' do |f|
+    .hidden-xs.hidden-sm
+      .row
+        .col-md-5
+          %h3.general-subtitle= t('billing_address')
+          %p.general-info-text= t('simple_form.titles.required_fields')
+        .col-md-5.col-md-offset-1
+          %h3.general-subtitle= t('shipping_address')
+    .row
+      .col-md-5.mb-40
+        .visible-xs.visible-sm
+          %h3.general-subtitle= t('billing_address')
+          %p.general-info-text= t('simple_form.titles.required_fields')
+        = f.simple_fields_for :billing, presenter.order_billing do |sf|
+          = render partial: 'address_fields', locals: { sf: sf, type: :billing }
+      .col-md-5.col-md-offset-1.mb-60
+        .visible-xs.visible-sm
+          %h3.general-subtitle= t('shipping_address')
+        = f.simple_fields_for :shipping, presenter.order_shipping do |sf|
+          #shipping_address_fields{style: presenter.shipping_fields_style}
+            = render partial: 'address_fields', locals: { sf: sf, type: :shipping }
+        = fields_for 'order' do |ub|
+          .form-group.checkbox{'data-slide-toggle-for': '#shipping_address_fields'}
+            %label.font-weight-light.pl-0
+              = ub.check_box 'use_billing',
+                checked: presenter.use_billing,
+                class: 'checkbox-input',
+                hidden: false
+              %span.checkbox-icon
+                %i.fa.fa-check
+              %span.checkbox-text= t('simple_form.labels.address.use_billing')
 
+    .general-text-align.mb-60
+      = f.submit t('simple_form.titles.save_and_continue'),
+        class: 'btn btn-default center-block mb-20'

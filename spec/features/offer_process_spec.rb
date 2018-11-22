@@ -18,12 +18,15 @@ feature 'Offering book(s)' do
 
   scenario 'step filling shipping and billing addresses' do
     visit checkout_path("address")
+    check "using"
     within ".order-billing" do
+      fill_in 'First name', with: "Hue"
+      fill_in 'Last name', with: "Janus"
       fill_in 'Address', with: Faker::Address.full_address
       fill_in 'Zipcode', with: Faker::Address.zip_code
       fill_in 'City', with: Faker::Address.city
-      fill_in 'Phone', with: Faker::Internet.email
-      fill_in 'Country', with: Faker::PhoneNumber.phone_number
+      fill_in 'Phone', with: Faker::PhoneNumber.phone_number
+      fill_in 'Country', with: Faker::Address.country
     end
     click_button('Next step')
     expect(page).to have_content('Delivery')
