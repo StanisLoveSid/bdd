@@ -2,7 +2,7 @@ module CheckoutPage
   class AddCheckoutDelivery < Rectify::Command
     def initialize(order, params)
       @order = order
-      @id = params[:order][:delivery_id]
+      @id = params[:delivery_id]
     end
 
     def call

@@ -1,2 +1,6 @@
-Confirmation
-= link_to "Submit", checkout_path(:complete)
+= render layout: 'checkout/layout' do
+  = render partial: 'orders/details', locals: { order: presenter.order_details }
+  = render partial: 'order_items/table', locals: { items: presenter.items }
+  = render partial: 'orders/summary', locals: { order: presenter.order_summary }
+  .text-center
+    = link_to t('simple_form.titles.place_order'), checkout_path(:complete), class: 'btn btn-default mb-20'

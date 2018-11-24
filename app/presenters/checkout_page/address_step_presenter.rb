@@ -26,11 +26,9 @@ module CheckoutPage
 
     def address(type)
       address = instance_variable_get("@#{type}_form") ||
-                current_order.send("#{type}")  ||
-                current_user.send("#{type}")
-
+        current_order.send("#{type}")  ||
+        current_user.send("#{type}")
       return address if address
-
 
     end
   end
