@@ -1,14 +1,14 @@
 .row.mb-20
   .col-sm-3
-    %h3.general-subtitle= t('shipping_address')
+    %h3.general-subtitle= t('order_shipping')
     - if order.edit_link?
       = order.edit_link(:address)
-    %p.general-address= order.shipping_address
+    %p.general-address= order.order_shipping
   .col-sm-3
-    %h3.general-subtitle= t('billing_address')
+    %h3.general-subtitle= t('order_billing')
     - if order.edit_link?
       = order.edit_link(:address)
-    %p.general-address= order.billing_address
+    %p.general-address= order.order_billing
   .col-sm-3
     %h3.general-subtitle= t('shipments')
     - if order.edit_link?

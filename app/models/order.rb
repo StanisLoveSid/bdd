@@ -1,6 +1,7 @@
 class Order < ApplicationRecord
   include AASM
-  
+  include OrderArithmeticHelpers
+
   has_many :order_items
   belongs_to :user, optional: true
   belongs_to :delivery, optional: true

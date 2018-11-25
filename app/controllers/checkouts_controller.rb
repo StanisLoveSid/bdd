@@ -37,10 +37,10 @@ class CheckoutsController < ApplicationController
 
   def complete
     CheckoutPage::PlaceOrder.call(current_order, params) do
-      on(:invalid) { redirect_to cart_path, alert: t('checkout.failure.invalid_step') }
+      on(:invalid) { redirect_to cart_path, alert: "something went wrong"}#t('checkout.failure.invalid_step') }
       on(:ok) do |old_order|
         present step_presenter.new(old_order)
-        render_wizard current_order
+        render_wizard
       end
     end
   end

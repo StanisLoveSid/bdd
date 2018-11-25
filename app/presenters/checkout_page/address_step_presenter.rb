@@ -10,6 +10,11 @@ module CheckoutPage
 
     attr_reader :use_billing
 
+    def order_summary
+      @order_summary ||= OrderSummary::OrderDecorator
+      .new(@order, deficit_method: :hide, position: :left)
+    end
+
     def order_billing
       @order_billing = address(:order_billing)
     end
