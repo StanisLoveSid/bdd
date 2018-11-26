@@ -1,4 +1,4 @@
-class CheckoutsController < ApplicationController
+class CheckoutController < ApplicationController
   include CheckoutWizard
 
   #before_action :fast_authenticate_user!

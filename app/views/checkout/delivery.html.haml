@@ -1,4 +1,4 @@
-= render layout: 'checkouts/layout' do
+= render layout: 'checkout/layout' do
   %h3.general-subtitle= t('shipping_method')
   .hidden-xs.mb-res-50
     = form_for current_order, url: wizard_path, method: :put, class: 'res-mb-100' do |f|

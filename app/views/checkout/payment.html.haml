@@ -1,4 +1,4 @@
-= render layout: 'checkouts/layout' do
+= render layout: 'checkout/layout' do
   %h3.general-subtitle Credit Card
   = form_for current_order, url: wizard_path, method: :put, class: 'max-600 mb-80' do |f|
     = f.simple_fields_for :credit_card, presenter.card do |sf|
