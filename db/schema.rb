@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_15_180328) do
+ActiveRecord::Schema.define(version: 2018_11_27_195247) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,6 +75,14 @@ ActiveRecord::Schema.define(version: 2018_11_15_180328) do
     t.index ["order_id"], name: "index_coupons_on_order_id"
   end
 
+  create_table "covers", force: :cascade do |t|
+    t.bigint "book_id"
+    t.string "file"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_covers_on_book_id"
+  end
+
   create_table "credit_cards", force: :cascade do |t|
     t.string "number"
     t.string "name"
@@ -111,6 +119,7 @@ ActiveRecord::Schema.define(version: 2018_11_15_180328) do
     t.string "aasm_state"
     t.string "number"
     t.boolean "use_billing", default: false
+    t.datetime "completed_at"
     t.index ["delivery_id"], name: "index_orders_on_delivery_id"
   end
 
@@ -142,6 +151,7 @@ ActiveRecord::Schema.define(version: 2018_11_15_180328) do
   add_foreign_key "authors_books", "authors"
   add_foreign_key "authors_books", "books"
   add_foreign_key "coupons", "orders"
+  add_foreign_key "covers", "books"
   add_foreign_key "credit_cards", "orders"
   add_foreign_key "orders", "deliveries"
   add_foreign_key "reviews", "books"

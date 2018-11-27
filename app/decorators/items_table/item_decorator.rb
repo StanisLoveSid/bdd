@@ -11,7 +11,7 @@ module ItemsTable
     end
 
     include ViewHelpers
-    #include BookCoverHelpers
+    include BookCoverHelpers
 
     def initialize(order_item)
       @order_item = order_item
@@ -22,9 +22,9 @@ module ItemsTable
     delegate :editable, to: :class
     attr_reader :order_item
 
-    #def cover
-    #  cover_url_or_default(version: :thumb)
-    #end
+    def cover
+      cover_url_or_default(version: :thumb)
+    end
 
     def description
       __getobj__.description.truncate(50) if self.class.description

@@ -15,9 +15,9 @@ module CheckoutPage
       @order.number
     end
 
-    #def order_date
-    #  @order.completed_at.strftime('%B %d, %Y')
-    #end
+    def order_date
+      @order.completed_at.strftime('%B %d, %Y')
+    end
 
     def address
       address = @order.use_billing ? @order.order_billing : @order.order_shipping
